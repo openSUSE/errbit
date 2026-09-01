@@ -15,22 +15,6 @@
 ### Similar ###
 <%= (notice.problem.notices_count - 1).to_s %>
 
-## Params ##
-~~~
-<%= pretty_hash(notice.params) %>
-~~~
-
-## Session ##
-~~~
-<%= pretty_hash(notice.session) %>
-~~~
-
-## Backtrace ##
-~~~
-<% notice.backtrace.lines.each do |line| %><%= line.number %>:  <%= line.file_relative %> -> **<%= line.method %>**
-<% end %>
-~~~
-
 <% if notice.env_vars.present? %>
 ## Environment ##
 | Key        | Value      |
