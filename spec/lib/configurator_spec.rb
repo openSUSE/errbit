@@ -33,6 +33,12 @@ RSpec.describe Configurator do
     expect(result.one).to eq("oveRIIIDE")
   end
 
+  it "accepts a mapping consisting of an override only" do
+    result = described_class.run(one: [->(_values) { "computed" }])
+
+    expect(result.one).to eq("computed")
+  end
+
   it "overrides can refer to other values" do
     result = described_class.run(one: ["VARONE", ->(values) { values[:one] }],
       three: ["VARTHREE"])

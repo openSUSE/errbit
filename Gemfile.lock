@@ -687,6 +687,7 @@ DEPENDENCIES
   inline_svg
   jquery-rails
   json
+  jwt
   kaminari
   kaminari-i18n
   kaminari-mongoid

@@ -170,6 +170,10 @@ Default in container: same as default value.
 <dt>GITHUB_ACCESS_SCOPE
 <dd>OAuth scope to request from users when they sign in through GitHub
 <dd>defaults to [repo]
+<dt>GITHUB_APP_ID
+<dd>ID of a GitHub App used by the "github_app" issue tracker to create issues without any user or site-wide write token, see <a href="../README.md#github-app-issue-tracker">GitHub App issue tracker</a>
+<dt>GITHUB_APP_PRIVATE_KEY
+<dd>Private key of that GitHub App, downloaded as a .pem file via the "Generate a private key" button on the App's settings page (not the 40-character client secret, which only serves the OAuth login flow). Either the path of that file, or the PEM content itself, with real newlines or with them escaped as \n for environments that cannot pass multi-line values
 <dt>GITHUB_SITE_TITLE</dt>
 <dd>The title to use for GitHub. This value is whatever you want displayed in the Errbit UI when referring to GitHub.</dd>
 <dd>defaults to GitHub</dd>

@@ -37,6 +37,11 @@ Errbit::Config = Configurator.run(
   github_access_scope: ["GITHUB_ACCESS_SCOPE"],
   github_api_url: ["GITHUB_API_URL"],
   github_site_title: ["GITHUB_SITE_TITLE"],
+  github_app_id: ["GITHUB_APP_ID"],
+  # Read verbatim through the override alone, so Configurator never runs the
+  # value through YAML: that folds a multi-line PEM into a single line that
+  # OpenSSL cannot read, and a secret has no business being parsed at all.
+  github_app_private_key: [->(_values) { ENV.fetch("GITHUB_APP_PRIVATE_KEY", nil) }],
   # google
   google_authentication: ["GOOGLE_AUTHENTICATION"],
   google_auto_provision: ["GOOGLE_AUTO_PROVISION"],

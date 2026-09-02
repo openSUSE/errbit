@@ -39,9 +39,26 @@ RSpec.describe "problems/show.html.erb", type: :view do
     end
   end
 
+  let(:github_app_tracker) do
+    Class.new(ErrbitPlugin::MockIssueTracker) do
+      def self.label
+        "github_app"
+      end
+
+      def self.icons
+        {}
+      end
+
+      def configured?
+        true
+      end
+    end
+  end
+
   let(:trackers) do
     {
       "github" => github_tracker,
+      "github_app" => github_app_tracker,
       "pivotal" => pivotal_tracker
     }
   end
@@ -178,6 +195,26 @@ RSpec.describe "problems/show.html.erb", type: :view do
         allow(view).to receive(:app).and_return(problem.app)
 
         allow(controller).to receive(:current_user).and_return(create(:user))
+        allow(Errbit::Config).to receive(:github_access_scope).and_return([])
+
+        render
+
+        expect(action_bar).to have_selector("span a.create-issue", text: "create issue")
+      end
+
+      # The github_app tracker files issues as the GitHub App itself, so no
+      # user OAuth write scope is involved.
+      it "should offer the create issue button for a github_app tracker to users without github write access" do
+        problem = create(:problem_with_comments, app: app)
+
+        with_issue_tracker("github_app", problem)
+
+        allow(view).to receive(:problem).and_return(problem)
+        allow(view).to receive(:app).and_return(problem.app)
+
+        user = create(:user, github_login: "test_user", github_oauth_token: "abcdef")
+
+        allow(controller).to receive(:current_user).and_return(user)
         allow(Errbit::Config).to receive(:github_access_scope).and_return([])
 
         render
