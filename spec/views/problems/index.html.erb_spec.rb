@@ -29,6 +29,18 @@ RSpec.describe "problems/index.html.erb", type: :view do
     end
   end
 
+  describe "issue link" do
+    # The link and the tracker it came from are recorded on the problem, so
+    # it stays reachable after the app's issue tracker was removed.
+    it "links the issue of a problem whose app has no issue tracker configured" do
+      problem_1.update(issue_type: "github", issue_link: "https://github.com/errbit/errbit/issues/1347")
+
+      render
+
+      expect(rendered).to have_selector("td.issue_link a[href='https://github.com/errbit/errbit/issues/1347']")
+    end
+  end
+
   describe "show/hide resolved button behavior" do
     it "displays unresolved errors title and button" do
       allow(view).to receive(:all_errs).and_return(false)
