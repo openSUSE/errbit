@@ -120,15 +120,15 @@
 
   <div class="tab-bar">
     <ul>
+      <%# formaction takes each button to its own path without touching the
+          form, so a confirm the user waves off leaves nothing behind. %>
       <% [:merge, :unmerge, :resolve, :unresolve, :delete].each do |action| %>
         <li>
           <%= submit_tag t(".#{action}").capitalize,
                          id: "#{action}_problems",
                          class: "button",
-                         data: {
-                           action: polymorphic_path([action == :delete ? :destroy : action, :several_problems]),
-                           confirm: problem_confirm(action)
-                         } %>
+                         formaction: polymorphic_path([action == :delete ? :destroy : action, :several_problems]),
+                         data: {confirm: problem_confirm(action)} %>
         </li>
       <% end %>
     </ul>

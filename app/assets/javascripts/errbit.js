@@ -25,8 +25,6 @@ $(function() {
                              "?copy_attributes_from=" + $(this).val();
     });
 
-    bindProblemButtonsActions();
-
     $('.notice-pagination').each(function() {
       $.pjax.defaults = {timeout: 2000};
 
@@ -48,7 +46,6 @@ $(function() {
     $('#flash-messages').empty();
     if (target.attr('id') == 'problem_table') {
       toggleProblemsCheckboxes();
-      bindProblemButtonsActions();
     }
   });
 
@@ -90,12 +87,6 @@ $(function() {
       });
     });
   }
-
-  window.bindProblemButtonsActions = function() {
-      $('input[type=submit][data-action]').on('click', function() {
-          $(this).closest('form').attr('action', $(this).attr('data-action'));
-      });
-  };
 
     function activateSelectableRows() {
     $('.selectable tr').click(function(event) {
