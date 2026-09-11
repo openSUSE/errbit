@@ -1,0 +1,105 @@
+/*
+ * SUSE colours for errbit.
+ *
+ *   #30BA78  the SUSE green of suse.com. 2.5:1 against white, so it carries
+ *            accents and never text on a light background.
+ *   #17724A  that same hue darkened until it clears AA on white (5.9:1), so
+ *            it can carry link text. The stock blue it replaces was 5.4:1.
+ *   #0C322C  the pine green suse.com puts behind its header.
+ *   #FE7C3F  the secondary orange. 2.6:1 on white rules it out for text too,
+ *            so it marks the rule under a title bar and the hover state of
+ *            the tabs and pill buttons, never a letter. Text links darken
+ *            to the pine green on hover for the same reason.
+ *
+ * Only chrome is repainted. The colours errbit gives meaning to are left
+ * alone on purpose - the red of a required field or a destructive button,
+ * the green of an in-app backtrace line, the flash message backgrounds, the
+ * resolved and unresolved markers. Restyling those would cost information.
+ */
+
+/* Header: black bar to pine green, with a brand green rule under it. The
+   logo is light ink on transparency, so it reads on the darker ground. */
+#header {
+  background: #0C322C;
+  border-bottom: 3px solid #30BA78;
+}
+
+#header #session-links li:hover {
+  box-shadow: 0 0 3px #30BA78;
+  -moz-box-shadow: 0 0 3px #30BA78;
+  -webkit-box-shadow: 0 0 3px #30BA78;
+}
+
+/* Links. These two tie with several of errbit's own single-class rules on
+   specificity and only win by coming later, so anything that gave a link a
+   colour for a reason has to be restated below. */
+a, a:visited { color: #17724A; }
+a:hover      { color: #0C322C; }
+
+/* A count badge is white on red, or white on green once resolved. The tie
+   against a:visited would otherwise turn a badge the reader has already
+   clicked into dark green on red - 1.1:1, which is to say gone. */
+.count a,
+.count a:visited,
+.count a:hover { color: #fff; }
+
+/* The resolved title bar is #90EE90. Links on it were blue and told apart
+   from the bar by hue; in green they would blur into the very signal the
+   bar exists to give, so they go pine. */
+#content-title.resolved a,
+#content-title.resolved a:visited { color: #0C322C; }
+
+/* The selected tab keeps its white face and takes a green edge, thick
+   enough to read against the header it sits in. */
+#nav-bar li.active {
+  border-color: #30BA78;
+  /* Nothing in the loaded sheets sets border-box, so the thicker edge has
+     to come out of the content height or the tab grows upward by 2px and
+     bares a sliver of header beneath its neighbours. */
+  border-top-width: 3px;
+  height: 35px;
+  box-shadow: 0 -1px 0 #30BA78;
+  -moz-box-shadow: 0 -1px 0 #30BA78;
+  -webkit-box-shadow: 0 -1px 0 #30BA78;
+}
+
+/* The one place the secondary colour appears without being hovered: the
+   rule between a page's title bar and its content. */
+#content {
+  border-top-color: #FE7C3F;
+}
+
+/* Hover is the secondary colour, throughout. */
+#nav-bar li:not(.active):hover,
+#action-bar span:hover {
+  border-color: #FE7C3F;
+  box-shadow: 0 0 4px #FE7C3F;
+  -moz-box-shadow: 0 0 4px #FE7C3F;
+  -webkit-box-shadow: 0 0 4px #FE7C3F;
+}
+
+/* The one submit button errbit does not wrap in div.buttons - the comment
+   form's - keeps its own blue background, so it is the last stock blue on
+   the page. White on this green is 5.9:1. The .button variant is a class
+   more specific and stays the grey pill it was. */
+form input[type=submit] {
+  background-color: #17724A;
+}
+
+/* Focus is the primary one. */
+form input[type=text]:focus,
+form input[type=password]:focus,
+form input[type=email]:focus,
+form textarea:focus {
+  box-shadow: 0 0 4px #30BA78;
+  -moz-box-shadow: 0 0 4px #30BA78;
+  -webkit-box-shadow: 0 0 4px #30BA78;
+}
+
+form input[type=checkbox]:focus + label { color: #17724A; }
+
+form div.buttons:hover {
+  box-shadow: 0 0 3px #30BA78;
+  -moz-box-shadow: 0 0 3px #30BA78;
+  -webkit-box-shadow: 0 0 3px #30BA78;
+}
