@@ -17,7 +17,7 @@
   <%= app.problems.count %>
 
   <strong><%= t(".api_key") %></strong>
-  <%= app.api_key %>
+  <%= masked_api_key(app.api_key) %>
 <% end %>
 
 <% content_for :action_bar do %>

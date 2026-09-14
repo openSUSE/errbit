@@ -1,6 +1,14 @@
 # frozen_string_literal: true
 
 module AppsHelper
+  # Show only the first half of an API key so that a screenshot or a
+  # shared screen of the app page does not hand the key to everyone
+  # watching. The second half is replaced by the same number of "X".
+  def masked_api_key(api_key)
+    key = api_key.to_s
+    key[0, key.length / 2].ljust(key.length, "X")
+  end
+
   def link_to_copy_attributes_from_other_app
     return if App.count <= 1
 

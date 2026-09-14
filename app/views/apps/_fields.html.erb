@@ -12,7 +12,7 @@
   <div>
     <label><%= t(".api_key") %></label>
 
-    <span><%= app.api_key %></span>
+    <span><%= masked_api_key(app.api_key) %></span>
 
     <%= link_to(t(".regenerate_api_key"), regenerate_api_key_app_path(app), class: "button", method: :post) %>
   </div>
