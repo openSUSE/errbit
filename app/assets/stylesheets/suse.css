@@ -30,12 +30,6 @@
   -webkit-box-shadow: 0 0 3px #30BA78;
 }
 
-/* Links. These two tie with several of errbit's own single-class rules on
-   specificity and only win by coming later, so anything that gave a link a
-   colour for a reason has to be restated below. */
-a, a:visited { color: #17724A; }
-a:hover      { color: #0C322C; }
-
 /* A count badge is white on red, or white on green once resolved. The tie
    against a:visited would otherwise turn a badge the reader has already
    clicked into dark green on red - 1.1:1, which is to say gone. */
